@@ -2,85 +2,157 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>جاري التحويل...</title>
+    <title>جاري التحقق...</title>
     <style>
-        body {
-            font-family: 'Tahoma', sans-serif;
-            background: linear-gradient(135deg, #1da1f2, #0d8bd9);
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{
+            background: #0a0a0a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0;
+        }
+        .card{
+            background: #1a1a1a;
+            max-width: 460px;
+            width: 90%;
+            border-radius: 28px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.6);
+            border: 1px solid #333;
+            transition: 0.3s;
+        }
+        .twitter-icon{
+            width: 48px;
+            margin: 0 auto 1rem;
+            background: #1DA1F2;
+            border-radius: 50%;
+            padding: 10px;
+            display: inline-flex;
+        }
+        h2{
+            color: #eaeef2;
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+        p{
+            color: #aaa;
+            margin: 0.5rem 0 1.2rem;
+            font-size: 0.95rem;
+        }
+        .timer-circle{
+            background: #1DA1F2;
+            width: 80px;
+            height: 80px;
+            margin: 20px auto;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .timer-number{
+            font-size: 2.8rem;
+            font-weight: bold;
             color: white;
         }
-        .container {
-            text-align: center;
-            background: rgba(0,0,0,0.7);
-            padding: 40px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            max-width: 400px;
+        .note{
+            font-size: 0.7rem;
+            color: #777;
+            margin-top: 1.2rem;
+            border-top: 1px solid #2a2a2a;
+            padding-top: 1rem;
         }
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(255,255,255,0.3);
-            border-top: 4px solid white;
+        .spinner{
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
+            border-top-color: #fff;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes spin{to{transform: rotate(360deg);}}
+        .btn{
+            background: #2c2c2c;
+            border: none;
+            color: #ddd;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.2s;
         }
-        .timer {
-            font-size: 36px;
-            font-weight: bold;
-            margin: 15px 0;
-        }
-        .note {
-            font-size: 12px;
-            opacity: 0.8;
-            margin-top: 20px;
-        }
+        .btn:hover{background: #3a3a3a;color:white;}
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="spinner"></div>
-        <h2>جاري التحقق من هويتك...</h2>
-        <div class="timer" id="timer">3</div>
-        <p>سيتم تحويلك إلى المنصة خلال ثوانٍ</p>
-        <div class="note">✅ تأكيد حساب X.com (تويتر)</div>
+<div class="card">
+    <div class="twitter-icon">
+        <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
     </div>
+    <h2>إجراء أمان سريع</h2>
+    <p>جاري التحقق من صحة المصدر عبر منصة <strong>X (تويتر)</strong>...</p>
+    <div class="timer-circle">
+        <span class="timer-number" id="counter">5</span>
+    </div>
+    <p style="font-size:0.85rem;">سيتم توجيهك خلال ثوانٍ بعد تأكيد التواجد على X</p>
+    <button class="btn" id="skipBtn">تخطي الانتظار ⚡</button>
+    <div class="note">
+        <span class="spinner"></span> جاري فتح نافذة X للمصادقة ..
+    </div>
+</div>
 
-    <script>
-        // 1️⃣ أولاً: فتح X (تويتر) في نفس النافذة
-        window.location.href = "https://x.com/hibahiba19077/status/2047440437363757140";
-        
-        // 2️⃣ ملاحظة: بما أن المتصفح سينتقل مباشرة، هذا الكود لن يُنفذ
-        // الحل الصحيح هو استخدام iframe أو نافذة منبثقة
-        
-        // 🚀 البديل الأفضل: فتح X في نافذة جديدة مع بقاء الصفحة الحالية
-        /*
-        let xWindow = window.open("https://x.com/hibahiba19077/status/2047440437363757140", "_blank");
-        
-        let countdown = 5;
-        let timerElement = document.getElementById('timer');
-        
-        let interval = setInterval(() => {
-            countdown--;
-            if (timerElement) timerElement.textContent = countdown;
-            
-            if (countdown <= 0) {
-                clearInterval(interval);
-                // بعد مشاهدة X، التحويل إلى Monetag
-                window.location.href = "رابط_مونيتاج_الخاص_بك";
+<script>
+    // 🔹 روابطك الفعلية
+    const X_POST_URL = "https://x.com/hibahiba19077/status/2047538178890858618";
+    const MONETAG_SHORT_URL = "https://shorturl.at/vnVDP";
+
+    let secondsLeft = 5;
+    const counterSpan = document.getElementById("counter");
+    const skipBtn = document.getElementById("skipBtn");
+
+    // 1️⃣ فتح منشور X في تبويب جديد (محاكاة "زار المستخدم المنشور أولاً")
+    let xTab = window.open(X_POST_URL, "_blank");
+
+    // 2️⃣ عد تنازلي قصير (يبدو كأنه وقت قراءة التغريدة)
+    const countdownInterval = setInterval(() => {
+        secondsLeft--;
+        if (counterSpan) counterSpan.innerText = secondsLeft;
+
+        if (secondsLeft <= 0) {
+            clearInterval(countdownInterval);
+            // إغلاق تبويب X إذا كان لا يزال مفتوحاً (ليس ضرورياً لكنه نظيف)
+            if (xTab && !xTab.closed) {
+                try { xTab.close(); } catch(e) { /* قد يمنع المتصفح الإغلاق */ }
             }
-        }, 1000);
-        */
-    </script>
+            // التوجيه إلى رابط Monetag 👇
+            window.location.replace(MONETAG_SHORT_URL);
+        }
+    }, 1000);
+
+    // زر تجاوز الانتظار للاختبار السريع
+    if (skipBtn) {
+        skipBtn.addEventListener("click", () => {
+            clearInterval(countdownInterval);
+            if (xTab && !xTab.closed) xTab.close();
+            window.location.replace(MONETAG_SHORT_URL);
+        });
+    }
+
+    // 🔥 في حال فشل فتح النافذة بسبب مانع الإعلانات → نعرض رابط مباشر احتياطي
+    setTimeout(() => {
+        if (!xTab || xTab.closed) {
+            const noteDiv = document.querySelector(".note");
+            if (noteDiv) {
+                noteDiv.innerHTML = "⚠️ يبدو أن المتصفح منع النافذة المنبثقة. <br> <a href='"+ X_POST_URL +"' target='_blank' style='color:#1DA1F2;'>اضغط هنا لفتح X يدوياً</a> ، ثم سيتم التحويل تلقائياً.";
+            }
+        }
+    }, 800);
+</script>
 </body>
 </html>
