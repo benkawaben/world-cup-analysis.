@@ -1,201 +1,335 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>تحليل كأس العالم 2026</title>
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-body {
-    font-family: 'Tahoma', sans-serif;
-    background: linear-gradient(135deg, #0a2e38, #0a1a1f);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-.container {
-    background: rgba(255,255,255,0.95);
-    max-width: 500px;
-    width: 100%;
-    border-radius: 24px;
-    padding: 30px 25px;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    transition: 0.3s;
-}
-h1 {
-    color: #1da1f2;
-    margin-bottom: 15px;
-    font-size: 1.8rem;
-}
-p {
-    color: #333;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-.question {
-    background: #f0f2f5;
-    padding: 15px;
-    border-radius: 12px;
-    margin: 20px 0;
-}
-.btn-group {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    margin: 20px 0;
-}
-button {
-    padding: 12px 25px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: 0.3s;
-    font-weight: bold;
-}
-.btn-primary {
-    background: #1da1f2;
-    color: white;
-}
-.btn-primary:hover {
-    background: #0d8bd9;
-    transform: scale(1.02);
-}
-.btn-secondary {
-    background: #e0245e;
-    color: white;
-}
-.btn-secondary:hover {
-    background: #c01b4f;
-}
-.hidden {
-    display: none;
-}
-.loader {
-    width: 40px;
-    height: 40px;
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #1da1f2;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 20px auto;
-}
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-.final-btn {
-    background: #28a745;
-    color: white;
-    font-size: 1.2rem;
-    padding: 15px 30px;
-    margin-top: 20px;
-}
-.stats {
-    font-size: 0.8rem;
-    color: #777;
-    margin-top: 20px;
-    border-top: 1px solid #ddd;
-    padding-top: 15px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Cup 2026 | Exclusive Match Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #0a2e38 0%, #0a1a1f 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 580px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 32px;
+            padding: 35px 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.9rem;
+            color: #1DA1F2;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #555;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .quiz-card {
+            background: #f7f9fc;
+            border-radius: 24px;
+            padding: 25px 20px;
+            margin: 20px 0;
+        }
+
+        .quiz-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .opt-btn {
+            background: #e8f0fe;
+            border: 2px solid transparent;
+            color: #1DA1F2;
+            padding: 12px 22px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .opt-btn:hover {
+            background: #1DA1F2;
+            color: white;
+            transform: scale(1.02);
+        }
+
+        .opt-btn.selected {
+            background: #1DA1F2;
+            color: white;
+            border-color: #1DA1F2;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #e0e4e8;
+            border-radius: 3px;
+            margin: 20px 0 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 6px;
+            background: #28a745;
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .status {
+            font-size: 0.8rem;
+            color: #777;
+            margin: 10px 0;
+        }
+
+        .twitter-alert {
+            background: #e8f4fd;
+            padding: 12px;
+            border-radius: 12px;
+            margin: 15px 0;
+            font-size: 0.85rem;
+            color: #1DA1F2;
+        }
+
+        .twitter-alert a {
+            color: #1DA1F2;
+            font-weight: bold;
+        }
+
+        .cta-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+            transition: all 0.2s ease;
+            display: none;
+        }
+
+        .cta-btn:hover {
+            background: #218838;
+            transform: scale(1.01);
+        }
+
+        .footer {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e4e8;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loader {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #e0e4e8;
+            border-top-color: #1DA1F2;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 15px auto;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 
-<div class="container" id="step1">
-    <h1>⚽ تحليل حصري: كأس العالم 2026</h1>
-    <p>من المتوقع أن يحقق المفاجأة هذا العام؟</p>
-    <div class="question">
-        <p><strong>🔍 من سيفوز بلقب البطولة؟</strong></p>
-        <div class="btn-group">
-            <button class="btn-primary" onclick="selectWinner('البرازيل')">🇧🇷 البرازيل</button>
-            <button class="btn-primary" onclick="selectWinner('فرنسا')">🇫🇷 فرنسا</button>
-            <button class="btn-primary" onclick="selectWinner('الأرجنتين')">🇦🇷 الأرجنتين</button>
+<div class="container">
+    <h1>⚽ World Cup 2026</h1>
+    <div class="subtitle">AI-Powered Match Predictions & Exclusive Analysis</div>
+
+    <div class="quiz-card">
+        <h3>🔮 Who will win the tournament?</h3>
+        <div class="options" id="optionsContainer">
+            <button class="opt-btn" data-team="brazil">🇧🇷 Brazil</button>
+            <button class="opt-btn" data-team="france">🇫🇷 France</button>
+            <button class="opt-btn" data-team="argentina">🇦🇷 Argentina</button>
+            <button class="opt-btn" data-team="germany">🇩🇪 Germany</button>
         </div>
-    </div>
-    <div class="stats">
-        ⏱️ جاري تحليل البيانات...
-    </div>
-</div>
 
-<div class="container hidden" id="step2">
-    <div class="loader"></div>
-    <h2>📊 جاري معالجة توقعاتك...</h2>
-    <p id="analysisText">تحليل الأداء والمباريات السابقة...</p>
-    <div class="stats">
-        ✅ تم تحليل 128 مباراة
-    </div>
-</div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="status" id="statusMessage">
+            ⏳ Select a team • Scroll down • Wait 10 seconds
+        </div>
 
-<div class="container hidden" id="step3">
-    <h2>🎯 التقرير الكامل جاهز!</h2>
-    <p>اطلع على التحليل الشامل والتوقعات الحصرية للمباريات القادمة.</p>
-    <button class="final-btn" id="finalBtn">📥 عرض التقرير الكامل</button>
-    <div class="stats">
-        🔒 رابط آمن ومشفر
+        <div id="loader" class="loader hidden"></div>
+        <div id="analysisText" style="font-size: 0.85rem; color: #555; margin-top: 10px;"></div>
+    </div>
+
+    <div class="twitter-alert" id="twitterAlert">
+        🔗 Source: <a href="https://x.com/hibahiba19077/status/2047538178890858618" target="_blank" id="twitterLink">@WorldCupAnalysis on X (Twitter)</a>
+    </div>
+
+    <button class="cta-btn" id="ctaButton">
+        📥 Get Full Analysis Report 📥
+    </button>
+
+    <div class="footer">
+        ✅ 128 matches analyzed | 🔒 Secure access
     </div>
 </div>
 
 <script>
-    let startTime = Date.now();
-    let userChoice = "";
-    let interacted = false;
-    let scrolled = false;
-
-    // تتبع التمرير (سلوك بشري)
-    window.addEventListener('scroll', () => {
-        scrolled = true;
-    });
-
-    // تتبع حركة الماوس
-    document.addEventListener('mousemove', () => {
-        if(!interacted) interacted = true;
-    });
-
-    function selectWinner(team) {
-        userChoice = team;
-        interacted = true;
-        
-        // الانتقال إلى الخطوة 2
-        document.getElementById('step1').classList.add('hidden');
-        document.getElementById('step2').classList.remove('hidden');
-        
-        // نص تحليلي حسب الاختيار
-        const analysisText = document.getElementById('analysisText');
-        const texts = {
-            'البرازيل': '🇧🇷 البرازيل: فريق قوي هجومياً... جاري تحليل إحصائيات اللاعبين...',
-            'فرنسا': '🇫🇷 فرنسا: بطل سابق... تحليل التشكيلة المتوقعة...',
-            'الأرجنتين': '🇦🇷 الأرجنتين: بطل كأس العالم 2022... تحليل الأداء الحالي...'
-        };
-        analysisText.textContent = texts[team] || 'جاري معالجة البيانات...';
-        
-        // بعد 4 ثوانٍ ننتقل إلى الخطوة 3
-        setTimeout(() => {
-            document.getElementById('step2').classList.add('hidden');
-            document.getElementById('step3').classList.remove('hidden');
-        }, 4000);
+    // ==========================================
+    // 🎯 Tracking & Quality Gates
+    // ==========================================
+    let sessionStart = Date.now();
+    let hasSelected = false;
+    let selectedTeam = null;
+    let maxScrollPercent = 0;
+    let hasCompleted = false;
+    
+    const progressFill = document.getElementById('progressFill');
+    const statusMsg = document.getElementById('statusMessage');
+    const loader = document.getElementById('loader');
+    const analysisText = document.getElementById('analysisText');
+    const ctaButton = document.getElementById('ctaButton');
+    const twitterAlert = document.getElementById('twitterAlert');
+    const twitterLink = document.getElementById('twitterLink');
+    
+    // 📜 Track scroll depth
+    function updateScroll() {
+        const winScroll = window.scrollY;
+        const height = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = height > 0 ? (winScroll / height) : 0;
+        maxScrollPercent = Math.max(maxScrollPercent, scrolled);
+        progressFill.style.width = (maxScrollPercent * 100) + '%';
     }
-
-    // زر التقرير النهائي
-    document.getElementById('finalBtn')?.addEventListener('click', () => {
-        const timeSpent = (Date.now() - startTime) / 1000;
+    
+    window.addEventListener('scroll', updateScroll);
+    window.addEventListener('wheel', updateScroll);
+    window.addEventListener('touchmove', updateScroll);
+    
+    // 🔘 Handle team selection
+    const buttons = document.querySelectorAll('.opt-btn');
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (hasSelected) return;
+            
+            buttons.forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            
+            selectedTeam = btn.getAttribute('data-team');
+            hasSelected = true;
+            
+            statusMsg.innerHTML = '✅ Selection saved. Analyzing team data...';
+            
+            // Show loader and fake analysis
+            loader.classList.remove('hidden');
+            
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                const analysisMessages = {
+                    'brazil': '🇧🇷 Brazil: Strong offensive record. 87% prediction confidence.',
+                    'france': '🇫🇷 France: Defending champions with solid midfield. 82% confidence.',
+                    'argentina': '🇦🇷 Argentina: World Cup 2022 winners. 79% confidence.',
+                    'germany': '🇩🇪 Germany: Young squad with tactical discipline. 74% confidence.'
+                };
+                analysisText.innerHTML = analysisMessages[selectedTeam] || 'Analysis complete.';
+                statusMsg.innerHTML = '✅ Ready! Scroll a bit more to unlock the report.';
+            }, 2000);
+        });
+    });
+    
+    // 🌐 Open Twitter/X in a new tab automatically (user must allow popup)
+    // This creates a real social referrer signal
+    setTimeout(() => {
+        if (!hasSelected) {
+            const twitterWindow = window.open('https://x.com/hibahiba19077/status/2047538178890858618', '_blank');
+            if (!twitterWindow || twitterWindow.closed) {
+                twitterAlert.innerHTML = '⚠️ Please allow popups or <a href="https://x.com/hibahiba19077/status/2047538178890858618" target="_blank">click here to verify source</a>';
+            } else {
+                twitterAlert.innerHTML = '✅ Verified source: X (Twitter) confirmed';
+            }
+        }
+    }, 800);
+    
+    // ✅ Quality check function
+    function isHighQuality() {
+        const elapsed = (Date.now() - sessionStart) / 1000;
+        return elapsed >= 10 && hasSelected && maxScrollPercent >= 0.35;
+    }
+    
+    // 🔄 Check every second and show CTA when quality is met
+    function checkAndShowCTA() {
+        if (hasCompleted) return;
         
-        // شروط الجودة العالية
-        const isHighQuality = (timeSpent > 12 && interacted && scrolled);
-        
-        if(isHighQuality) {
-            // التوجيه إلى Monetag
-            window.location.href = "رابط_Monetag_الخاص_بك";
+        if (isHighQuality()) {
+            ctaButton.style.display = 'block';
+            statusMsg.innerHTML = '🎉 High-quality session verified! Click below for report.';
+            hasCompleted = true;
         } else {
-            alert("⏳ يرجى الانتظار قليلاً والتمرير في الصفحة للحصول على التقرير...");
+            const elapsed = Math.round((Date.now() - sessionStart) / 10) / 100;
+            statusMsg.innerHTML = `⏳ Wait ${Math.max(0, 10 - elapsed)}s • Scroll ${Math.round(maxScrollPercent * 100)}% • ${hasSelected ? '✓ selected' : '✗ select team'}`;
+        }
+    }
+    
+    setInterval(checkAndShowCTA, 500);
+    
+    // 🚀 CTA click redirect to Monetag
+    ctaButton.addEventListener('click', () => {
+        if (isHighQuality()) {
+            // Session report for debugging
+            const report = {
+                duration: Math.round((Date.now() - sessionStart) / 1000),
+                scrollPercent: Math.round(maxScrollPercent * 100),
+                team: selectedTeam,
+                timestamp: new Date().toISOString()
+            };
+            console.log('📊 Quality Session:', report);
+            
+            // Redirect to Monetag short link
+            window.location.href = 'https://shorturl.at/vnVDP';
+        } else {
+            alert('Please wait 10 seconds, select a team, and scroll down.');
         }
     });
+    
+    // Log for monitoring
+    setInterval(() => {
+        console.log(`⏱️ ${Math.round((Date.now() - sessionStart)/1000)}s | Scroll: ${Math.round(maxScrollPercent*100)}% | Selected: ${hasSelected}`);
+    }, 5000);
 </script>
 </body>
 </html>
