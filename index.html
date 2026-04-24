@@ -3,333 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>World Cup 2026 | Exclusive Match Analysis</title>
+    <title>World Cup 2026 Analysis</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #0a2e38 0%, #0a1a1f 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a2e38, #0a1a1f);
+            color: white;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            margin: 0;
         }
-
-        .container {
-            max-width: 580px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.98);
+        .card {
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
             border-radius: 32px;
-            padding: 35px 30px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
             text-align: center;
+            box-shadow: 0 25px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
         }
-
-        h1 {
-            font-size: 1.9rem;
-            color: #1DA1F2;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            color: #555;
-            margin-bottom: 25px;
-            font-size: 0.95rem;
-        }
-
-        .quiz-card {
-            background: #f7f9fc;
-            border-radius: 24px;
-            padding: 25px 20px;
-            margin: 20px 0;
-        }
-
-        .quiz-card h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .options {
+        h1 { color: #1DA1F2; margin-bottom: 10px; font-size: 2rem; }
+        .twitter-icon {
+            background: #1DA1F2;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
+            align-items: center;
             justify-content: center;
-            margin: 20px 0;
+            margin: 0 auto 20px;
+            font-size: 28px;
         }
-
-        .opt-btn {
-            background: #e8f0fe;
-            border: 2px solid transparent;
-            color: #1DA1F2;
-            padding: 12px 22px;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
+        .status-box {
+            background: #11242e;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: left;
         }
-
-        .opt-btn:hover {
-            background: #1DA1F2;
-            color: white;
-            transform: scale(1.02);
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
         }
-
-        .opt-btn.selected {
-            background: #1DA1F2;
-            color: white;
-            border-color: #1DA1F2;
-        }
-
-        .progress-bar {
-            height: 6px;
-            background: #e0e4e8;
-            border-radius: 3px;
-            margin: 20px 0 10px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 6px;
-            background: #28a745;
-            border-radius: 3px;
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .status {
-            font-size: 0.8rem;
-            color: #777;
-            margin: 10px 0;
-        }
-
-        .twitter-alert {
-            background: #e8f4fd;
-            padding: 12px;
-            border-radius: 12px;
-            margin: 15px 0;
-            font-size: 0.85rem;
-            color: #1DA1F2;
-        }
-
-        .twitter-alert a {
-            color: #1DA1F2;
-            font-weight: bold;
-        }
-
-        .cta-btn {
+        .btn {
             background: #28a745;
             color: white;
             border: none;
-            padding: 16px 32px;
+            padding: 14px 25px;
             border-radius: 50px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 20px;
             width: 100%;
-            transition: all 0.2s ease;
-            display: none;
+            transition: 0.2s;
         }
-
-        .cta-btn:hover {
-            background: #218838;
-            transform: scale(1.01);
+        .btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+            transform: none;
         }
-
-        .footer {
-            font-size: 0.7rem;
-            color: #aaa;
-            margin-top: 25px;
-            padding-top: 15px;
-            border-top: 1px solid #e0e4e8;
+        .btn:not(:disabled):hover { background: #218838; transform: scale(1.01); }
+        .progress-bar {
+            height: 8px;
+            background: #2c5a6b;
+            border-radius: 4px;
+            margin: 15px 0;
+            overflow: hidden;
         }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: #1DA1F2;
+            transition: width 1s linear;
         }
-
-        .loader {
-            width: 40px;
-            height: 40px;
-            border: 3px solid #e0e4e8;
-            border-top-color: #1DA1F2;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 15px auto;
+        .team-btn {
+            background: #1e3a47;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 40px;
+            margin: 5px;
+            cursor: pointer;
         }
-
-        .hidden {
-            display: none;
-        }
+        .team-btn.selected { background: #1DA1F2; }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
-
-<div class="container">
+<div class="card">
+    <div class="twitter-icon">🐦</div>
     <h1>⚽ World Cup 2026</h1>
-    <div class="subtitle">AI-Powered Match Predictions & Exclusive Analysis</div>
+    <p>Exclusive AI analysis & predictions</p>
 
-    <div class="quiz-card">
-        <h3>🔮 Who will win the tournament?</h3>
-        <div class="options" id="optionsContainer">
-            <button class="opt-btn" data-team="brazil">🇧🇷 Brazil</button>
-            <button class="opt-btn" data-team="france">🇫🇷 France</button>
-            <button class="opt-btn" data-team="argentina">🇦🇷 Argentina</button>
-            <button class="opt-btn" data-team="germany">🇩🇪 Germany</button>
+    <div class="status-box">
+        <div class="status-item"><span>🔐 Social Verification:</span><span id="xStatus">⏳ Pending</span></div>
+        <div class="status-item"><span>⏱️ Time (10s):</span><span id="timerStatus">0 / 10</span></div>
+        <div class="status-item"><span>📜 Scroll (40%):</span><span id="scrollStatus">0%</span></div>
+        <div class="status-item"><span>✅ Team Pick:</span><span id="pickStatus">❌ No</span></div>
+        <div class="progress-bar"><div id="timeProgress" class="progress-fill"></div></div>
+        <div id="teamButtons">
+            <button class="team-btn" data-team="Brazil">🇧🇷 Brazil</button>
+            <button class="team-btn" data-team="France">🇫🇷 France</button>
+            <button class="team-btn" data-team="Argentina">🇦🇷 Argentina</button>
         </div>
-
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
-        <div class="status" id="statusMessage">
-            ⏳ Select a team • Scroll down • Wait 10 seconds
-        </div>
-
-        <div id="loader" class="loader hidden"></div>
-        <div id="analysisText" style="font-size: 0.85rem; color: #555; margin-top: 10px;"></div>
     </div>
 
-    <div class="twitter-alert" id="twitterAlert">
-        🔗 Source: <a href="https://x.com/hibahiba19077/status/2047538178890858618" target="_blank" id="twitterLink">@WorldCupAnalysis on X (Twitter)</a>
-    </div>
-
-    <button class="cta-btn" id="ctaButton">
-        📥 Get Full Analysis Report 📥
-    </button>
-
-    <div class="footer">
-        ✅ 128 matches analyzed | 🔒 Secure access
-    </div>
+    <button id="ctaBtn" class="btn" disabled>🔒 Unlock Full Report</button>
+    <p style="font-size: 12px; margin-top: 20px; opacity: 0.6;">© World Cup Analysis Hub</p>
 </div>
 
 <script>
-    // ==========================================
-    // 🎯 Tracking & Quality Gates
-    // ==========================================
-    let sessionStart = Date.now();
-    let hasSelected = false;
-    let selectedTeam = null;
-    let maxScrollPercent = 0;
-    let hasCompleted = false;
-    
-    const progressFill = document.getElementById('progressFill');
-    const statusMsg = document.getElementById('statusMessage');
-    const loader = document.getElementById('loader');
-    const analysisText = document.getElementById('analysisText');
-    const ctaButton = document.getElementById('ctaButton');
-    const twitterAlert = document.getElementById('twitterAlert');
-    const twitterLink = document.getElementById('twitterLink');
-    
-    // 📜 Track scroll depth
-    function updateScroll() {
-        const winScroll = window.scrollY;
-        const height = document.documentElement.scrollHeight - window.innerHeight;
-        const scrolled = height > 0 ? (winScroll / height) : 0;
-        maxScrollPercent = Math.max(maxScrollPercent, scrolled);
-        progressFill.style.width = (maxScrollPercent * 100) + '%';
+    // ======================== CONFIG =========================
+    // !! IMPORTANT: Replace with your actual Monetag link !!
+    const MONETAG_URL = "https://shorturl.at/vnVDP";
+    const X_POST_URL = "https://x.com/hibahiba19077/status/2047538178890858618";
+    // ========================================================
+
+    // --- Tracking Variables ---
+    let startTime = Date.now();
+    let xOpened = false;
+    let teamSelected = false;
+    let maxScroll = 0;
+    let timerInterval = null;
+    let allConditionsMet = false;
+
+    // --- DOM Elements ---
+    const ctaBtn = document.getElementById('ctaBtn');
+    const timerStatusSpan = document.getElementById('timerStatus');
+    const scrollStatusSpan = document.getElementById('scrollStatus');
+    const pickStatusSpan = document.getElementById('pickStatus');
+    const xStatusSpan = document.getElementById('xStatus');
+    const timeProgressFill = document.getElementById('timeProgress');
+    const teamBtns = document.querySelectorAll('.team-btn');
+
+    // --- Helper: Update UI ---
+    function updateUI() {
+        const elapsed = (Date.now() - startTime) / 1000;
+        const timeOk = elapsed >= 10;
+        timerStatusSpan.innerText = `${Math.min(10, elapsed.toFixed(1))} / 10`;
+        timeProgressFill.style.width = `${Math.min(100, (elapsed / 10) * 100)}%`;
+
+        const scrollOk = maxScroll >= 40;
+        scrollStatusSpan.innerText = `${maxScroll}%`;
+        pickStatusSpan.innerText = teamSelected ? "✅ Yes" : "❌ No";
+        xStatusSpan.innerText = xOpened ? "✅ Verified" : "⚠️ Click below";
+
+        allConditionsMet = timeOk && scrollOk && teamSelected && xOpened;
+
+        if (allConditionsMet && ctaBtn.disabled) {
+            ctaBtn.disabled = false;
+            ctaBtn.innerText = "📥 Get Full Analysis Now 📥";
+            ctaBtn.style.background = "#28a745";
+        } else if (!allConditionsMet && !ctaBtn.disabled) {
+            ctaBtn.disabled = true;
+            ctaBtn.innerText = "🔒 Complete all steps first";
+            ctaBtn.style.background = "#555";
+        }
     }
-    
-    window.addEventListener('scroll', updateScroll);
-    window.addEventListener('wheel', updateScroll);
-    window.addEventListener('touchmove', updateScroll);
-    
-    // 🔘 Handle team selection
-    const buttons = document.querySelectorAll('.opt-btn');
-    buttons.forEach(btn => {
+
+    // --- Scroll Tracking ---
+    function updateScrollPercent() {
+        const scrollY = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (docHeight > 0) {
+            let percent = (scrollY / docHeight) * 100;
+            percent = Math.min(100, Math.max(0, percent));
+            if (percent > maxScroll) maxScroll = Math.floor(percent);
+            updateUI();
+        }
+    }
+
+    window.addEventListener('scroll', updateScrollPercent);
+    window.addEventListener('resize', updateScrollPercent);
+    setTimeout(updateScrollPercent, 500);
+
+    // --- Timer Progress ---
+    timerInterval = setInterval(() => {
+        updateUI();
+        if ((Date.now() - startTime) / 1000 >= 10) {
+            // Timer done, but we keep updating UI only
+        }
+    }, 200);
+
+    // --- Team Selection ---
+    teamBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            if (hasSelected) return;
-            
-            buttons.forEach(b => b.classList.remove('selected'));
+            teamBtns.forEach(b => b.classList.remove('selected'));
             btn.classList.add('selected');
-            
-            selectedTeam = btn.getAttribute('data-team');
-            hasSelected = true;
-            
-            statusMsg.innerHTML = '✅ Selection saved. Analyzing team data...';
-            
-            // Show loader and fake analysis
-            loader.classList.remove('hidden');
-            
-            setTimeout(() => {
-                loader.classList.add('hidden');
-                const analysisMessages = {
-                    'brazil': '🇧🇷 Brazil: Strong offensive record. 87% prediction confidence.',
-                    'france': '🇫🇷 France: Defending champions with solid midfield. 82% confidence.',
-                    'argentina': '🇦🇷 Argentina: World Cup 2022 winners. 79% confidence.',
-                    'germany': '🇩🇪 Germany: Young squad with tactical discipline. 74% confidence.'
-                };
-                analysisText.innerHTML = analysisMessages[selectedTeam] || 'Analysis complete.';
-                statusMsg.innerHTML = '✅ Ready! Scroll a bit more to unlock the report.';
-            }, 2000);
+            teamSelected = true;
+            updateUI();
         });
     });
-    
-    // 🌐 Open Twitter/X in a new tab automatically (user must allow popup)
-    // This creates a real social referrer signal
-    setTimeout(() => {
-        if (!hasSelected) {
-            const twitterWindow = window.open('https://x.com/hibahiba19077/status/2047538178890858618', '_blank');
-            if (!twitterWindow || twitterWindow.closed) {
-                twitterAlert.innerHTML = '⚠️ Please allow popups or <a href="https://x.com/hibahiba19077/status/2047538178890858618" target="_blank">click here to verify source</a>';
+
+    // --- X / Twitter Verification (opens in new tab) ---
+    function openXVerification() {
+        if (!xOpened) {
+            const xWindow = window.open(X_POST_URL, '_blank');
+            if (xWindow && !xWindow.closed) {
+                xOpened = true;
+                updateUI();
+                // Optional: try to close after 3 seconds? Better to leave open for tracking.
             } else {
-                twitterAlert.innerHTML = '✅ Verified source: X (Twitter) confirmed';
+                alert("⚠️ Please allow pop-ups for this site to verify via X (Twitter).");
+                // Provide a manual link
+                xStatusSpan.innerHTML = `<a href="${X_POST_URL}" target="_blank">Click here to verify manually</a>`;
             }
         }
-    }, 800);
-    
-    // ✅ Quality check function
-    function isHighQuality() {
-        const elapsed = (Date.now() - sessionStart) / 1000;
-        return elapsed >= 10 && hasSelected && maxScrollPercent >= 0.35;
     }
-    
-    // 🔄 Check every second and show CTA when quality is met
-    function checkAndShowCTA() {
-        if (hasCompleted) return;
-        
-        if (isHighQuality()) {
-            ctaButton.style.display = 'block';
-            statusMsg.innerHTML = '🎉 High-quality session verified! Click below for report.';
-            hasCompleted = true;
+
+    // Automatically try to open X verification after 1 second (user might need to click "allow popups")
+    setTimeout(() => {
+        openXVerification();
+    }, 1000);
+
+    // Also allow manual click on status area
+    xStatusSpan.style.cursor = 'pointer';
+    xStatusSpan.addEventListener('click', openXVerification);
+
+    // --- Final CTA: Redirect to Monetag ---
+    ctaBtn.addEventListener('click', () => {
+        if (allConditionsMet) {
+            console.log("✅ All conditions met! Redirecting to Monetag...");
+            window.location.href = MONETAG_URL;
         } else {
-            const elapsed = Math.round((Date.now() - sessionStart) / 10) / 100;
-            statusMsg.innerHTML = `⏳ Wait ${Math.max(0, 10 - elapsed)}s • Scroll ${Math.round(maxScrollPercent * 100)}% • ${hasSelected ? '✓ selected' : '✗ select team'}`;
-        }
-    }
-    
-    setInterval(checkAndShowCTA, 500);
-    
-    // 🚀 CTA click redirect to Monetag
-    ctaButton.addEventListener('click', () => {
-        if (isHighQuality()) {
-            // Session report for debugging
-            const report = {
-                duration: Math.round((Date.now() - sessionStart) / 1000),
-                scrollPercent: Math.round(maxScrollPercent * 100),
-                team: selectedTeam,
-                timestamp: new Date().toISOString()
-            };
-            console.log('📊 Quality Session:', report);
-            
-            // Redirect to Monetag short link
-            window.location.href = 'https://shorturl.at/vnVDP';
-        } else {
-            alert('Please wait 10 seconds, select a team, and scroll down.');
+            alert("Please complete all verification steps:\n- Open X post\n- Wait 10 seconds\n- Scroll down at least 40%\n- Pick a team");
         }
     });
-    
-    // Log for monitoring
-    setInterval(() => {
-        console.log(`⏱️ ${Math.round((Date.now() - sessionStart)/1000)}s | Scroll: ${Math.round(maxScrollPercent*100)}% | Selected: ${hasSelected}`);
-    }, 5000);
+
+    // Initial call
+    updateUI();
+    console.log("Page loaded. Waiting for user interaction.");
 </script>
 </body>
 </html>
